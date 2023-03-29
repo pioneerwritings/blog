@@ -52,7 +52,7 @@ export default function DynamicTagPage() {
   return (
     <>
       <div className='border-b border-b-gray-200 p-10 lg:p-16 bg-gradient-to-r from-white via-[#FCF0FF] to-cornflower/10'>
-        <h1 className='font-bold text-2xl lg:text-3xl mb-2 text-midnight'>
+        <h1 className='font-extrabold text-2xl lg:text-3xl mb-2 text-midnight'>
           Latest Updates
         </h1>
 
