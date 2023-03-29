@@ -107,5 +107,3 @@ export default function DynamicTagPage() {
     </>
   )
 }
-
-export const config = { runtime: 'edge' }
