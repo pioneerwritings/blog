@@ -1,6 +1,6 @@
-import type { Config } from 'tailwindcss'
+/** @type {import('tailwindcss').Config} */
 
-export default <Config>{
+module.exports = {
   content: ['./app/**/*.{ts,tsx}'],
   theme: {
     extend: {
