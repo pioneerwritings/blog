@@ -1,4 +1,10 @@
-import { LoaderArgs, json, V2_MetaFunction } from '@remix-run/node'
+import {
+  LoaderArgs,
+  json,
+  V2_MetaFunction,
+  V2_HtmlMetaDescriptor
+} from '@remix-run/node'
+
 import { getPostBySlug } from '~/db'
 import { useLoaderData, Link } from '@remix-run/react'
 import { DateTime } from 'luxon'
@@ -11,10 +17,15 @@ export const loader = async ({ params }: LoaderArgs) => {
   })
 }
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: V2_MetaFunction<typeof loader> = ({ data, matches }) => {
   const { seo, author } = data.post
 
+  const parentMeta = matches.reduce((current, { meta }) => {
+    return meta ? current.concat(meta) : []
+  }, [] as V2_HtmlMetaDescriptor[])
+
   return [
+    ...parentMeta,
     {
       property: 'og:title',
       content: seo?.title!
