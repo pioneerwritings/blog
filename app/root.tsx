@@ -1,5 +1,11 @@
 import { Suspense, useMemo } from 'react'
-import { MetaFunction, LinksFunction, LoaderArgs, defer } from '@remix-run/node'
+import {
+  MetaFunction,
+  LinksFunction,
+  LoaderArgs,
+  defer,
+  V2_MetaFunction
+} from '@remix-run/node'
 
 import {
   LiveReload,
@@ -20,11 +26,14 @@ import { getTags } from './db'
 import clsx from 'clsx'
 import tailwind from './tailwind.css'
 
-export const meta: MetaFunction = () => ({
-  charset: 'utf-8',
-  title: 'Blog — Pioneer Writings',
-  viewport: 'width=device-width,initial-scale=1,user-scalable=yes'
-})
+export const meta: V2_MetaFunction = () => [
+  { title: 'Blog — Pioneer Writings' },
+  { charSet: 'utf-8' },
+  {
+    name: 'viewport',
+    content: 'width=device-width,initial-scale=1,user-scalable=yes'
+  }
+]
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind }

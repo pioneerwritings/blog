@@ -18,6 +18,15 @@ export const QueryGetPostBySlug = gql`
           url
         }
       }
+      seo {
+        title
+        description
+        image {
+          url
+          width
+          height
+        }
+      }
     }
   }
 `
