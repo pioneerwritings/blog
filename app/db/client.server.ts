@@ -19,7 +19,7 @@ export interface GetTagsReturnType {
   tags: Array<Tag>
 }
 export interface GetOGImageReturnType {
-  asset: Asset
+  assets: Array<Asset>
 }
 
 const client = new GraphQLClient(process.env.HYGRAPH_API_URL!)
@@ -36,7 +36,4 @@ export const getPostsByTag = async (tag: string) => {
 
 export const getTags = client.request<GetTagsReturnType>(QueryGetTags)
 
-export const getOGImage = client.request<GetOGImageReturnType>(
-  QueryGetOGImage,
-  { id: 'clfuelj333set0binrl4ect1o' }
-)
+export const getOGImage = client.request<GetOGImageReturnType>(QueryGetOGImage)

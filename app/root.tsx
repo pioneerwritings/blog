@@ -27,9 +27,7 @@ import clsx from 'clsx'
 import tailwind from './tailwind.css'
 
 export const meta: V2_MetaFunction = ({ data }) => {
-  const {
-    asset: { url, width, height }
-  } = data.ogImage
+  const { assets } = data.ogImage
 
   return [
     { title: 'Blog — Pioneer Writings' },
@@ -40,15 +38,15 @@ export const meta: V2_MetaFunction = ({ data }) => {
     },
     {
       property: 'og:image',
-      content: url
+      content: assets[0].url
     },
     {
       property: 'og:image:width',
-      content: width
+      content: assets[0].width
     },
     {
       property: 'og:image:height',
-      content: height
+      content: assets[0].height
     },
     {
       property: 'og:image:alt',

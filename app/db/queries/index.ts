@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request'
 
 export const QueryGetOGImage = gql`
-  query GetOGImage($id: ID!) {
-    asset(where: { id: $id }) {
+  query GetOGAsset {
+    assets(where: { fileName_contains: "og" }) {
       url
       width
       height
