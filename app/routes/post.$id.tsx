@@ -18,7 +18,7 @@ export const loader = async ({ params }: LoaderArgs) => {
 }
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data, matches }) => {
-  const { seo, author } = data.post
+  const { seo, author, publishedAt } = data.post
 
   const parentMeta = matches.reduce((current, { meta }) => {
     return meta ? current.concat(meta) : []
@@ -35,24 +35,20 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data, matches }) => {
       content: seo?.description!
     },
     {
-      property: 'og:image',
-      content: seo?.image?.url!
-    },
-    {
-      property: 'og:image:width',
-      content: seo?.image?.width?.toString() ?? ''
-    },
-    {
-      property: 'og:image:height',
-      content: seo?.image?.height?.toString() ?? ''
-    },
-    {
       property: 'og:type',
       content: 'article'
     },
     {
       property: 'og:author',
       content: author?.name!
+    },
+    {
+      property: 'article:author',
+      content: author?.name!
+    },
+    {
+      property: 'article:published_time',
+      content: publishedAt
     }
   ]
 }
