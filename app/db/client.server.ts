@@ -3,9 +3,11 @@ import {
   QueryGetPostBySlug,
   QueryGetPosts,
   QueryGetPostsByTag,
-  QueryGetTags
+  QueryGetTags,
+  QueryGetOGImage
 } from './queries'
-import { Tag, Post } from '~/types/codegen'
+
+import { Tag, Post, Asset } from '~/types/codegen'
 
 export interface GetPostsReturnType {
   posts: Array<Post>
@@ -15,6 +17,9 @@ export interface GetPostBySlugReturnType {
 }
 export interface GetTagsReturnType {
   tags: Array<Tag>
+}
+export interface GetOGImageReturnType {
+  asset: Asset
 }
 
 const client = new GraphQLClient(process.env.HYGRAPH_API_URL!)
@@ -30,3 +35,8 @@ export const getPostsByTag = async (tag: string) => {
 }
 
 export const getTags = client.request<GetTagsReturnType>(QueryGetTags)
+
+export const getOGImage = client.request<GetOGImageReturnType>(
+  QueryGetOGImage,
+  { id: 'clfuelj333set0binrl4ect1o' }
+)
