@@ -1,10 +1,10 @@
 import { Suspense, useMemo } from 'react'
+
 import {
-  MetaFunction,
-  LinksFunction,
-  LoaderArgs,
-  defer,
-  V2_MetaFunction
+  type LinksFunction,
+  type LoaderArgs,
+  type V2_MetaFunction,
+  defer
 } from '@remix-run/node'
 
 import {
@@ -21,19 +21,42 @@ import {
 } from '@remix-run/react'
 
 import { Show } from '~/components'
-import { getTags } from './db'
+import { getTags, getOGImage } from './db'
 
 import clsx from 'clsx'
 import tailwind from './tailwind.css'
 
-export const meta: V2_MetaFunction = () => [
-  { title: 'Blog — Pioneer Writings' },
-  { charSet: 'utf-8' },
-  {
-    name: 'viewport',
-    content: 'width=device-width,initial-scale=1,user-scalable=yes'
-  }
-]
+export const meta: V2_MetaFunction = ({ data }) => {
+  const {
+    asset: { url, width, height }
+  } = data.ogImage
+
+  return [
+    { title: 'Blog — Pioneer Writings' },
+    { charSet: 'utf-8' },
+    {
+      name: 'viewport',
+      content: 'width=device-width,initial-scale=1,user-scalable=yes'
+    },
+    {
+      property: 'og:image',
+      content: url
+    },
+    {
+      property: 'og:image:width',
+      content: width
+    },
+    {
+      property: 'og:image:height',
+      content: height
+    },
+    {
+      property: 'og:image:alt',
+      content:
+        'An image showing the Pioneer Writings logo and Blog next to it in bold letters, on a colorful background.'
+    }
+  ]
+}
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind }
@@ -48,7 +71,8 @@ export function headers() {
 
 export const loader = async ({}: LoaderArgs) => {
   return defer({
-    tags: getTags
+    tags: getTags,
+    ogImage: await getOGImage
   })
 }
 
@@ -75,12 +99,9 @@ export default function App() {
     return (path: string) => {
       const isActive = pathname.toLowerCase().includes(path)
 
-      return clsx(
-        'text-xl py-3 px-6 cursor-pointer hover:bg-gray-50 rounded-full capitalize',
-        {
-          'font-bold bg-gray-50': isActive
-        }
-      )
+      return clsx('text-xl py-3 cursor-pointer rounded-full capitalize', {
+        'font-bold': isActive
+      })
     }
   }, [pathname])
 
@@ -104,21 +125,25 @@ export default function App() {
                 <Await resolve={tags} errorElement={<p>Something broke</p>}>
                   {({ tags }) => {
                     return (
-                      <ul className='mx-auto'>
-                        <Link to={`/tag/all`} prefetch='intent'>
-                          <li className={activeTagClasses('all')}>all</li>
-                        </Link>
+                      <ul className='w-20 mx-auto'>
+                        <li className={activeTagClasses('all')}>
+                          <Link
+                            className='block'
+                            to={`/tag/all`}
+                            prefetch='intent'>
+                            all
+                          </Link>
+                        </li>
 
                         {tags.map(({ text }, i) => {
                           return (
-                            <Link
-                              to={`/tag/${text}`}
-                              key={`${text}-${i}`}
-                              prefetch='intent'>
-                              <li className={activeTagClasses(text!)}>
+                            <li
+                              className={activeTagClasses(text!)}
+                              key={`${text}-${i}`}>
+                              <Link to={`/tag/${text}`} prefetch='intent'>
                                 {text}
-                              </li>
-                            </Link>
+                              </Link>
+                            </li>
                           )
                         })}
                       </ul>
