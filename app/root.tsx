@@ -37,6 +37,10 @@ export const meta: V2_MetaFunction = ({ data }) => {
       content: 'width=device-width,initial-scale=1,user-scalable=yes'
     },
     {
+      name: 'description',
+      content: 'The latest updates and news from the Pioneer Writings team.'
+    },
+    {
       property: 'og:image',
       content: assets[0].url
     },
