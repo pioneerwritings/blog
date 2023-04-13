@@ -74,18 +74,12 @@ export default function PostPage() {
             alt="The author's avatar"
           />
           <div className='mr-5 flex flex-col'>
-            <span className='text-slate-500 text-sm'>
-              {post.author?.name} <span className='text-slate-500 mx-3'>|</span>{' '}
-              {published}
+            <span className='text-midnight text-sm font-medium'>
+              {post.author?.name}
             </span>
+            <span className='text-slate-500 text-sm'>{published}</span>
           </div>
         </div>
-
-        <Link to={`/tag/${post.tag?.text}`}>
-          <span className='border border-indigo px-3 flex items-center justify-center rounded-full text-indigo capitalize text-sm'>
-            {post.tag?.text}
-          </span>
-        </Link>
       </div>
 
       <h1 className='font-extrabold text-3xl lg:text-4xl text-midnight max-w-2xl'>

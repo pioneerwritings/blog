@@ -67,40 +67,25 @@ export default function DynamicTagPage() {
         ))}>
         <Await resolve={posts} errorElement={<p>Something broke</p>}>
           {({ posts }) => {
-            return posts.map(
-              ({ id, title, excerpt, publishedAt, tag, author, slug }) => {
-                const date = DateTime.fromJSDate(new Date(publishedAt))
-                const published = date.toLocaleString(DateTime.DATE_FULL)
+            return posts.map(({ id, title, excerpt, publishedAt, slug }) => {
+              const date = DateTime.fromJSDate(new Date(publishedAt))
+              const published = date.toLocaleString(DateTime.DATE_FULL)
 
-                return (
-                  <Link to={`/post/${slug}`} key={id} prefetch='intent'>
-                    <div className='w-full min-h-screen border-b border-b-gray-200 p-10 lg:p-16 cursor-pointer last:border-0'>
-                      <div className='flex items-center mb-6'>
-                        <img
-                          className='w-8 h-8 rounded-full mr-5'
-                          src={author?.picture?.url}
-                          alt="The author's avatar"
-                        />
-                        <span className='mr-5 text-slate-500 text-sm'>
-                          {published}
-                        </span>
+              return (
+                <Link to={`/post/${slug}`} key={id} prefetch='intent'>
+                  <div className='w-full border-b border-b-gray-200 p-10 lg:p-16 cursor-pointer'>
+                    <span className='mr-5 mb-3 text-slate-500 text-sm block'>
+                      {published}
+                    </span>
 
-                        <span className='border border-indigo px-3 flex items-center justify-center rounded-full text-indigo capitalize text-sm'>
-                          {tag?.text}
-                        </span>
-                      </div>
-
-                      <h1 className='font-bold text-lg text-midnight'>
-                        {title}
-                      </h1>
-                      <p className='font-light max-w-xl mt-2 text-slate-600'>
-                        {excerpt}
-                      </p>
-                    </div>
-                  </Link>
-                )
-              }
-            )
+                    <h1 className='font-bold text-lg text-midnight'>{title}</h1>
+                    <p className='font-light max-w-xl mt-2 text-slate-600'>
+                      {excerpt}
+                    </p>
+                  </div>
+                </Link>
+              )
+            })
           }}
         </Await>
       </Suspense>
