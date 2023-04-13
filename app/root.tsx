@@ -157,7 +157,7 @@ export default function App() {
           </aside>
 
           <main className='content w-full lg:w-3/4 h-screen'>
-            <header className='w-full h-16 pr-8 pl-10 lg:pl-16 py-2 sm:border sm:border-gray-200 sm:border-t-0 flex items-center justify-between'>
+            <header className='w-full h-16 pr-8 pl-10 lg:pl-16 py-2 border border-gray-200 sm:border-t-0 flex items-center justify-between'>
               <Show when={pathname.includes('tag')}>
                 <div className='logo flex items-center lg:hidden'>
                   <img src='/img/logomark.svg' aria-hidden alt='' />
