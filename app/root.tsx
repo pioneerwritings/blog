@@ -117,7 +117,7 @@ export default function App() {
       </head>
       <body>
         <div className='app flex items-center container mx-auto'>
-          <aside className='sidebar hidden w-full lg:flex lg:w-1/4 h-screen border-x border-r-gray-200 lg:flex-col'>
+          <aside className='sidebar hidden w-full lg:flex lg:w-1/4 h-screen lg:flex-col'>
             <div className='h-16 mb-8 flex justify-center pt-5'>
               <img src='/img/logo.svg' aria-hidden alt='' />
             </div>
@@ -156,8 +156,8 @@ export default function App() {
             </Show>
           </aside>
 
-          <main className='content w-full lg:w-3/4 h-screen sm:border-x lg:border-l-0 lg:border-r-gray-200 lg:overflow-y-scroll'>
-            <header className='w-full h-16 pr-8 pl-10 lg:pl-16 py-2 border-b border-b-gray-200 flex items-center justify-between'>
+          <main className='content w-full lg:w-3/4 h-screen'>
+            <header className='w-full h-16 pr-8 pl-10 lg:pl-16 py-2 border border-gray-200 sm:border-t-0 flex items-center justify-between'>
               <Show when={pathname.includes('tag')}>
                 <div className='logo flex items-center lg:hidden'>
                   <img src='/img/logomark.svg' aria-hidden alt='' />
@@ -168,7 +168,7 @@ export default function App() {
                 when={pathname.includes('post')}
                 fallback={<div className='bg-transparent' />}>
                 <Link
-                  className='text-ash text-sm flex items-center'
+                  className='text-slate-500 text-sm flex items-center'
                   to='/tag/all'
                   prefetch='intent'>
                   <img
@@ -186,7 +186,12 @@ export default function App() {
                 rel='no-referrer'
                 target='_blank'
                 className='flex items-center justify-end'>
-                Home <img className='ml-3' src='/img/external.svg' />
+                Home{' '}
+                <img
+                  className='ml-3'
+                  src='/img/external.svg'
+                  alt='Click to go to the Pioneer Writings website'
+                />
               </a>
             </header>
             <Outlet />

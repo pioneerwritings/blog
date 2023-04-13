@@ -50,7 +50,7 @@ export default function DynamicTagPage() {
   const { posts } = useLoaderData<typeof loader>()
 
   return (
-    <>
+    <div className='sm:border-x'>
       <div className='border-b border-b-gray-200 p-10 lg:p-16 bg-gradient-to-r from-white via-[#FCF0FF] to-cornflower/10'>
         <h1 className='font-extrabold text-2xl lg:text-3xl mb-2 text-midnight'>
           Latest Updates
@@ -74,18 +74,18 @@ export default function DynamicTagPage() {
 
                 return (
                   <Link to={`/post/${slug}`} key={id} prefetch='intent'>
-                    <div className='w-full border-b border-b-gray-200 p-10 lg:p-16 cursor-pointer'>
+                    <div className='w-full min-h-screen border-b border-b-gray-200 p-10 lg:p-16 cursor-pointer last:border-0'>
                       <div className='flex items-center mb-6'>
                         <img
                           className='w-8 h-8 rounded-full mr-5'
                           src={author?.picture?.url}
                           alt="The author's avatar"
                         />
-                        <span className='mr-5 text-ash text-sm'>
+                        <span className='mr-5 text-slate-500 text-sm'>
                           {published}
                         </span>
 
-                        <span className='border border-cornflower px-3 flex items-center justify-center rounded-full text-cornflower capitalize text-sm'>
+                        <span className='border border-indigo px-3 flex items-center justify-center rounded-full text-indigo capitalize text-sm'>
                           {tag?.text}
                         </span>
                       </div>
@@ -104,6 +104,6 @@ export default function DynamicTagPage() {
           }}
         </Await>
       </Suspense>
-    </>
+    </div>
   )
 }

@@ -67,6 +67,7 @@ export const QueryGetPostBySlug = gql`
   query GetPost($slug: String!) {
     post(where: { slug: $slug }) {
       title
+      excerpt
       publishedAt
       content {
         html
@@ -80,10 +81,6 @@ export const QueryGetPostBySlug = gql`
         picture {
           url
         }
-      }
-      seo {
-        title
-        description
       }
     }
   }
